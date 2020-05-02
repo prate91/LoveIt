@@ -24,7 +24,7 @@ Découvrez en quoi consiste le thème Hugo - **LoveIt** et les concepts fondamen
 
 {{< admonition warning >}}
 Sorry, this article has not been completely translated into **French**.
-Welcome to take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
+Welcome to take the time to propose a translation by [:(fas fa-code-branch fa-fw): making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
 {{< /admonition >}}
 
 ## 1 Requirements
@@ -34,7 +34,7 @@ Thanks to the simplicity of Hugo, [Hugo](https://gohugo.io/) is the only depende
 Just install latest version of [:(far fa-file-archive fa-fw): Hugo extended (> 0.62.0)](https://gohugo.io/getting-started/installing/) for your OS (**Windows**, **Linux**, **macOS**).
 
 {{< admonition note "Why not support earlier versions of Hugo?" >}}
-Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **0.62.0**.
+Since [Markdown Render Hooks](https://gohugo.io/getting-started/configuration-markup#markdown-render-hooks) was introduced in the [Hugo Christmas Edition](https://gohugo.io/news/0.62.0-relnotes/), this theme only supports Hugo versions above **0.62.0**.
 {{< /admonition >}}
 
 {{< admonition note "Why need the Hugo extended version?" >}}
@@ -186,9 +186,7 @@ Alternatively, you can use [AWS Amplify](https://gohugo.io/hosting-and-deploymen
 
 In addition to [Hugo global configuration](https://gohugo.io/overview/configuration/) and [menu configuration](#basic-configuration), **LoveIt** lets you define the following parameters in your site configuration (here is a `config.toml`, whose values are default).
 
-{{< admonition >}}
-Note that some of these parameters are explained in details in other sections of this documentation.
-{{< /admonition >}}
+Please open the code block below to view the complete sample configuration :(far fa-hand-point-down fa-fw)::
 
 ```toml
 [params]
@@ -228,10 +226,18 @@ Note that some of these parameters are explained in details in other sections of
     enable = true
     # type of search engine ("lunr", "algolia")
     type = "lunr"
-    # index length of the content
-    contentLength = 5000
+    # max index length of the chunked content
+    contentLength = 4000
     # placeholder of the search bar
     placeholder = ""
+    # {{< version 0.2.1 >}} max number of results length
+    maxResultLength = 10
+    # {{< version 0.2.3 >}} snippet length of the result
+    snippetLength = 30
+    # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
+    highlightTag = "em"
+    # {{< version 0.2.4 >}} whether to use the absolute URL based on the baseURL in search index
+    absoluteURL = false
     [params.search.algolia]
       index = ""
       appID = ""
@@ -243,6 +249,16 @@ Note that some of these parameters are explained in details in other sections of
     desktopMode = "fixed"
     # mobile header mode ("fixed", "normal", "auto")
     mobileMode = "auto"
+    # {{< version 0.2.0 >}} Header title config
+    [params.header.title]
+      # URL of the LOGO
+      logo = ""
+      # title name
+      name = ""
+      # you can add extra information before the name (HTML format is supported), such as icons
+      pre = ""
+      # you can add extra information after the name (HTML format is supported), such as icons
+      post = ""
 
   # Footer config
   [params.footer]
@@ -392,6 +408,8 @@ Note that some of these parameters are explained in details in other sections of
     fontawesome = true
     # whether to show link to Raw Markdown content of the content
     linkToMarkdown = true
+    # {{< version 0.2.4 >}} whether to show the full text content in RSS
+    rssFullText = false
     # {{< version 0.2.0 >}} Table of the contents config
     [params.page.toc]
       # whether to enable the table of the contents
@@ -425,44 +443,44 @@ Note that some of these parameters are explained in details in other sections of
       lightStyle = "mapbox://styles/mapbox/light-v9"
       # style for the dark theme
       darkStyle = "mapbox://styles/mapbox/dark-v9"
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol" NavigationControl >}}
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol" NavigationControl >}}
       navigation = true
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol" GeolocateControl >}}
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol" GeolocateControl >}}
       geolocate = true
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol" ScaleControl >}}
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#scalecontrol" ScaleControl >}}
       scale = true
-      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol" FullscreenControl >}}
+      # whether to add {{< link "https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol" FullscreenControl >}}
       fullscreen = true
     # {{< version 0.2.0 changed >}} social share links in post page
     [params.page.share]
       enable = true
       Twitter = true
       Facebook = true
-      Linkedin = true
+      Linkedin = false
       Whatsapp = true
-      Pinterest = true
-      # Tumblr = true
-      HackerNews = true
-      # Reddit = true
-      # VK = true
-      # Buffer = true
-      # Xing = true
-      # Line = true
-      # Instapaper = true
-      # Pocket = true
-      # Digg = true
-      # Stumbleupon = true
-      # Flipboard = true
-      # Weibo = true
-      # Renren = true
-      # Myspace = true
-      # Blogger = true
-      # Baidu = true
-      # Odnoklassniki = true
-      # Evernote = true
-      # Skype = true
-      # Trello = true
-      # Mix = true
+      Pinterest = false
+      Tumblr = false
+      HackerNews = false
+      Reddit = false
+      VK = false
+      Buffer = false
+      Xing = false
+      Line = true
+      Instapaper = false
+      Pocket = false
+      Digg = false
+      Stumbleupon = false
+      Flipboard = false
+      Weibo = true
+      Renren = false
+      Myspace = true
+      Blogger = true
+      Baidu = false
+      Odnoklassniki = false
+      Evernote = true
+      Skype = false
+      Trello = false
+      Mix = false
     # {{< version 0.2.0 changed >}} Comment config
     [params.page.comment]
       enable = true
@@ -492,6 +510,9 @@ Note that some of these parameters are explained in details in other sections of
         lang = ""
         visitor = true
         recordIP = true
+        highlight = true
+        enableQQ = false
+        serverURLs = ""
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook comment" >}} config
       [params.page.comment.facebook]
         enable = false
@@ -559,62 +580,66 @@ Note that some of these parameters are explained in details in other sections of
   # CSS and JS Files CDN config
   [params.cdn]
     # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
-    normalizeCSS = ''
+    normalizeCSS = ""
     # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.13.0
-    fontawesomeFreeCSS = ''
+    fontawesomeFreeCSS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/simple-icons/simple-icons" "simple-icons" >}}@2.9.0
-    # ('https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/')
-    simpleIconsPrefix = ''
+    # ("https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/")
+    simpleIconsPrefix = ""
     # animate.css@3.7.2 https://github.com/daneden/animate.css
-    animateCSS = ''
+    animateCSS = ""
     # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.3
-    smoothScrollJS = ''
+    smoothScrollJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
-    autocompleteJS = ''
+    autocompleteJS = ""
     # {{< version 0.2.0 >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
-    lunrJS = ''
+    lunrJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.2.0
-    algoliasearchJS = ''
+    algoliasearchJS = ""
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
-    lazysizesJS = ''
+    lazysizesJS = ""
+    # {{< version 0.2.3 >}} {{< link "https://github.com/fregante/object-fit-images" "object-fit-images" >}}@3.2.4
+    objectFitImagesJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/twitter/twemoji" "twemoji" >}}@12.1.5
-    twemojiJS = ''
-    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
-    lightgalleryCSS = ''
-    lightgalleryJS = ''
-    lightgalleryThumbnailJS = ''
-    lightgalleryZoomJS = ''
+    twemojiJS = ""
+    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3
+    # {{< link "https://github.com/sachinchoolur/lg-thumbnail.js" "lg-thumbnail.js" >}}@1.1.0
+    # {{< link "https://github.com/sachinchoolur/lg-zoom.js" "lg-zoom.js" >}}@1.0.1
+    lightgalleryCSS = ""
+    lightgalleryJS = ""
+    lightgalleryThumbnailJS = ""
+    lightgalleryZoomJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/zenorocha/clipboard.js" "clipboard.js" >}}@2.0.6
-    clipboardJS = ''
+    clipboardJS = ""
     # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
-    sharerJS = ''
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.3
-    typeitJS = ''
+    sharerJS = ""
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
+    typeitJS = ""
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
-    katexCSS = ''
-    katexJS = ''
-    katexAutoRenderJS = ''
-    katexCopyTexCSS = ''
-    katexCopyTexJS = ''
-    katexMhchemJS = ''
+    katexCSS = ""
+    katexJS = ""
+    katexAutoRenderJS = ""
+    katexCopyTexCSS = ""
+    katexCopyTexJS = ""
+    katexMhchemJS = ""
     # {{< link "https://github.com/knsv/mermaid" "mermaid" >}}@8.5.0
-    mermaidJS = ''
+    mermaidJS = ""
     # {{< link "https://echarts.apache.org/" "echarts" >}}@4.7.0
-    echartsJS = ''
-    echartsMacaronsJS = ''
-    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.9.1
-    mapboxGLCSS = ''
-    mapboxGLJS = ''
+    echartsJS = ""
+    echartsMacaronsJS = ""
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.10.0
+    mapboxGLCSS = ""
+    mapboxGLJS = ""
     # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
-    aplayerCSS = ''
-    aplayerJS = ''
+    aplayerCSS = ""
+    aplayerJS = ""
     # {{< link "https://github.com/metowolf/MetingJS" "meting" >}}@2.0.1
-    metingJS = ''
+    metingJS = ""
     # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
-    gitalkCSS = ''
-    gitalkJS = ''
-    # {{< link "https://valine.js.org/" "valine" >}}@1.4.9
-    valineJS = ''
+    gitalkCSS = ""
+    gitalkJS = ""
+    # {{< link "https://valine.js.org/" "valine" >}}@1.4.14
+    valineJS = ""
 
 # Markup related config in Hugo
 [markup]
@@ -657,7 +682,7 @@ Note that some of these parameters are explained in details in other sections of
   filename = "sitemap.xml"
   priority = 0.5
 
-# {{< link "https://gohugo.io/content-management/urls/#permalinks" "Permalinks config" >}}
+# {{< link "https://gohugo.io/content-management/urls#permalinks" "Permalinks config" >}}
 [Permalinks]
   # posts = ":year/:month/:filename"
   posts = ":filename"
@@ -692,6 +717,19 @@ Note that some of these parameters are explained in details in other sections of
   taxonomy = ["HTML", "RSS"]
   taxonomyTerm = ["HTML"]
 ```
+
+{{< admonition >}}
+Note that some of these parameters are explained in details in other sections of this documentation.
+{{< /admonition >}}
+
+{{< admonition note "Hugo environments" >}}
+Default environments are `development` with `hugo serve` and `production` with `hugo`.
+
+Due to limitations in the local `development` environment,
+the **comment system**, **CDN** and **fingerprint** will not be enabled in the `development` environment.
+
+You could enable these features with `hugo serve -e production`.
+{{< /admonition >}}
 
 {{< admonition tip "Tips about CDN Configuration" >}}
 Full HTML tags or URLs are supported for CDN configuration:
@@ -780,6 +818,8 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 
 ### 4.1 Compatibility {#language-compatibility}
 
+{{< version 0.2.0 changed >}}
+
 | Language             | Hugo Code | HTML `lang` Attribute | Theme Docs                    | Lunr.js Support               |
 |:-------------------- |:---------:|:---------------------:|:-----------------------------:|:-----------------------------:|
 | English              | `en`      | `en`                  | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
@@ -787,8 +827,7 @@ In `config/css/_custom.scss`, you can add some css style code to customize the s
 | French               | `fr`      | `fr`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 | Polish               | `pl`      | `pl`                  | :(far fa-square fa-fw):       | :(far fa-square fa-fw):       |
 | Brazilian Portuguese | `pt-br`   | `pt-BR`               | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
-
-:(far fa-kiss-wink-heart fa-fw): **Feel free to [contribute](https://github.com/dillonzq/LoveIt/pulls)!**
+| Italian              | `it`      | `it`                  | :(far fa-square fa-fw):       | :(far fa-check-square fa-fw): |
 
 ### 4.2 Basic Configuration
 
@@ -908,7 +947,7 @@ Be aware that only translated pages are displayed in menu. It’s not replaced w
 {{< /admonition >}}
 
 {{< admonition tip >}}
-Use [Front Matter parameter](https://gohugo.io/content-management/multilingual/#translate-your-content) to translate urls too.
+Use [Front Matter parameter](https://gohugo.io/content-management/multilingual#translate-your-content) to translate urls too.
 {{< /admonition >}}
 
 ### 4.3 Overwrite Translation Strings
@@ -917,7 +956,7 @@ Translations strings are used for common default values used in the theme. Trans
 
 To override these values, create a new file in your local i18n folder `i18n/<languageCode>.toml` and inspire yourself from `themes/LoveIt/i18n/en.toml`.
 
-By the way, as these translations could be used by other people, please take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
+By the way, as these translations could be used by other people, please take the time to propose a translation by [:(fas fa-code-branch fa-fw): making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
 
 ## 5 Search
 
@@ -945,23 +984,39 @@ Here is the search configuration in your [site configuration](#site-configuratio
   enable = true
   # type of search engine ("lunr", "algolia")
   type = "lunr"
-  # index length of the content
-  contentLength = 5000
+  # max index length of the chunked content
+  contentLength = 4000
+  # placeholder of the search bar
+  placeholder = ""
+  # {{< version 0.2.1 >}} max number of results length
+  maxResultLength = 10
+  # {{< version 0.2.3 >}} snippet length of the result
+  snippetLength = 30
+  # {{< version 0.2.1 >}} HTML tag name of the highlight part in results
+  highlightTag = "em"
+  # {{< version 0.2.4 >}} whether to use the absolute URL based on the baseURL in search index
+  absoluteURL = false
   [params.search.algolia]
     index = ""
     appID = ""
     searchKey = ""
 ```
 
-{{< admonition note "How to choose the type of search engine?" >}}
+{{< admonition note "How to choose search engine?" >}}
+The following is a comparison of two search engines:
+
 * `lunr`: simple, no need to synchronize `index.json`, no limit for `contentLength`,
   but high bandwidth and low performance (Especially for Chinese which needs a large segmentit library)
 * `algolia`: high performance and low bandwidth, but need to synchronize `index.json` and limit for `contentLength`
+
+{{< version 0.2.3 >}} The content of the post is separated by `h2` and `h3` HTML tag to improve query performance and basically implement full-text search.
+`contentLength` is used to limit the max index length of the part starting with `h2` and `h3` HTML tag.
 {{< /admonition >}}
 
 {{< admonition tip "Tips about algolia" >}}
 You need to upload `index.json` files to algolia to activate searching.
-You could upload the `index.json` files by browsers but a script may be a better choice.
+You could upload the `index.json` files by browsers but a CLI tool may be better.
+[Algolia Atomic](https://github.com/chrisdmacrae/atomic-algolia) is a good choice.
 To be compatible with Hugo multilingual mode,
 you need to upload different `index.json` for each language to the different index of algolia, such as `zh-cn/index.json` or `fr/index.json`...
 {{< /admonition >}}

@@ -32,7 +32,7 @@ class Theme {
     constructor() {
         this.config = window.config;
         this.data = this.config.data;
-        this.isDark = document.body.classList.contains('dark');
+        this.isDark = document.body.getAttribute('theme') === 'dark';
         this.util = new Util();
         this.newScrollTop = this.util.getScrollTop();
         this.oldScrollTop = this.newScrollTop;
@@ -40,6 +40,7 @@ class Theme {
         this.resizeEventSet = new Set();
         this.switchThemeEventSet = new Set();
         this.clickMaskEventSet = new Set();
+        if (objectFitImages) objectFitImages();
     }
 
     initSVGIcon() {
@@ -52,9 +53,11 @@ class Theme {
                     const $svg = $temp.firstChild;
                     $svg.setAttribute('data-svg-src', $icon.getAttribute('data-svg-src'));
                     $svg.classList.add('icon');
+                    const $titleElements = $svg.getElementsByTagName('title');
+                    if ($titleElements.length) $svg.removeChild($titleElements[0]);
                     $icon.parentElement.replaceChild($svg, $icon);
                 })
-                .catch(console.error.bind(console));
+                .catch(err => { console.error(err); });
         });
     }
 
@@ -80,7 +83,8 @@ class Theme {
     initSwitchTheme() {
         this.util.forEach(document.getElementsByClassName('theme-switch'), $themeSwitch => {
             $themeSwitch.addEventListener('click', () => {
-                document.body.classList.toggle('dark');
+                if (document.body.getAttribute('theme') === 'dark') document.body.setAttribute('theme', 'light');
+                else document.body.setAttribute('theme', 'dark');
                 this.isDark = !this.isDark;
                 window.localStorage && localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
                 for (let event of this.switchThemeEventSet) event();
@@ -90,6 +94,9 @@ class Theme {
 
     initSearch() {
         const searchConfig = this.config.search;
+        if (!searchConfig.maxResultLength) searchConfig.maxResultLength = 10;
+        if (!searchConfig.snippetLength) searchConfig.snippetLength = 50;
+        if (!searchConfig.highlightTag) searchConfig.highlightTag = 'em';
         const isMobile = this.util.isMobile();
         if (!searchConfig || isMobile && this._searchMobileOnce || !isMobile && this._searchDesktopOnce) return;
         const classSuffix = isMobile ? 'mobile' : 'desktop';
@@ -148,7 +155,6 @@ class Theme {
             else $searchClear.style.display = 'inline';
         }, false);
 
-        const CONTEXT_LENGTH = 200;
         const initAutosearch = () => {
             const autosearch = autocomplete(`#search-input-${classSuffix}`, {
                 hint: false,
@@ -156,7 +162,7 @@ class Theme {
                 dropdownMenuContainer: `#search-dropdown-${classSuffix}`,
                 clearOnSelected: true,
                 cssClasses: { noPrefix: true },
-             // debug: true,
+                debug: true,
             }, {
                 name: 'search',
                 source: (query, callback) => {
@@ -170,37 +176,37 @@ class Theme {
                     if (searchConfig.type === 'lunr') {
                         const search = () => {
                             if (lunr.queryHandler) query = lunr.queryHandler(query);
-                            return this._index.search(query).slice(0, 12).map(({ ref, matchData: { metadata } }) => {
+                            const results = {};
+                            this._index.search(query).forEach(({ ref, matchData: { metadata } }) => {
                                 const matchData = this._indexData[ref];
-                                let { title, content: context } = matchData;
+                                let { uri, title, content: context } = matchData;
+                                if (results[uri]) return;
                                 let position = 0;
-                                Object.values(metadata).forEach(({ description, content }) => {
-                                    if (description) {
-                                        context = matchData.description;
-                                        position = -1;
-                                    } else if (content) {
+                                Object.values(metadata).forEach(({ content }) => {
+                                    if (content) {
                                         const matchPosition = content.position[0][0];
                                         if (matchPosition < position || position === 0) position = matchPosition;
                                     }
                                 });
-                                position -= CONTEXT_LENGTH / 5;
+                                position -= searchConfig.snippetLength / 5;
                                 if (position > 0) {
-                                    position += context.substr(position, 25).lastIndexOf(' ') + 1;
-                                    context = '...' + context.substr(position, CONTEXT_LENGTH);
+                                    position += context.substr(position, 20).lastIndexOf(' ') + 1;
+                                    context = '...' + context.substr(position, searchConfig.snippetLength);
                                 } else {
-                                    context = context.substr(0, CONTEXT_LENGTH);
+                                    context = context.substr(0, searchConfig.snippetLength);
                                 }
                                 Object.keys(metadata).forEach(key => {
-                                    title = title.replace(new RegExp(`(${key})`, 'gi'), '<em>$1</em>');
-                                    context = context.replace(new RegExp(`(${key})`, 'gi'), '<em>$1</em>');
+                                    title = title.replace(new RegExp(`(${key})`, 'gi'), `<${searchConfig.highlightTag}>$1</${searchConfig.highlightTag}>`);
+                                    context = context.replace(new RegExp(`(${key})`, 'gi'), `<${searchConfig.highlightTag}>$1</${searchConfig.highlightTag}>`);
                                 });
-                                return {
-                                    'uri': matchData.uri,
+                                results[uri] = {
+                                    'uri': uri,
                                     'title' : title,
                                     'date' : matchData.date,
                                     'context' : context,
                                 };
                             });
+                            return Object.values(results).slice(0, searchConfig.maxResultLength);
                         }
                         if (!this._index) {
                             fetch(searchConfig.lunrIndexURL)
@@ -209,14 +215,14 @@ class Theme {
                                     const indexData = {};
                                     this._index = lunr(function () {
                                         if (searchConfig.lunrLanguageCode) this.use(lunr[searchConfig.lunrLanguageCode]);
-                                        this.ref('uri');
+                                        this.ref('objectID');
                                         this.field('title', { boost: 50 });
                                         this.field('tags', { boost: 20 });
-                                        this.field('description', { boost: 10 });
-                                        this.field('content', { boost: 5 });
+                                        this.field('categories', { boost: 20 });
+                                        this.field('content', { boost: 10 });
                                         this.metadataWhitelist = ['position'];
                                         data.forEach((record) => {
-                                            indexData[record.uri] = record;
+                                            indexData[record.objectID] = record;
                                             this.add(record);
                                         });
                                     });
@@ -228,18 +234,28 @@ class Theme {
                                 });
                         } else finish(search());
                     } else if (searchConfig.type === 'algolia') {
-                        $searchLoading.style.display = 'inline';
-                        $searchClear.style.display = 'none';
                         this._algoliaIndex = this._algoliaIndex || algoliasearch(searchConfig.algoliaAppID, searchConfig.algoliaSearchKey).initIndex(searchConfig.algoliaIndex);
                         this._algoliaIndex
-                            .search(query, { offset: 0, length: 12, attributesToHighlight: ['title', 'content'] })
+                            .search(query, {
+                                offset: 0,
+                                length: searchConfig.maxResultLength * 8,
+                                attributesToHighlight: ['title'],
+                                attributesToSnippet: [`content:${searchConfig.snippetLength}`],
+                                highlightPreTag: `<${searchConfig.highlightTag}>`,
+                                highlightPostTag: `</${searchConfig.highlightTag}>`,
+                            })
                             .then(({ hits }) => {
-                                finish(hits.map(({ uri, date, _highlightResult: { title, content } }) => ({
-                                    uri: uri,
-                                    title: title.value,
-                                    date: date,
-                                    context: content.value,
-                                })));
+                                const results = {};
+                                hits.forEach(({ uri, date, _highlightResult: { title }, _snippetResult: { content } }) => {
+                                    if (results[uri] && results[uri].context.length > content.value) return;
+                                    results[uri] = {
+                                        uri: uri,
+                                        title: title.value,
+                                        date: date,
+                                        context: content.value,
+                                    };
+                                });
+                                finish(Object.values(results).slice(0, searchConfig.maxResultLength));
                             })
                             .catch(err => {
                                 console.error(err);
@@ -397,7 +413,8 @@ class Theme {
             const rect = $page.getBoundingClientRect();
             $toc.style.left = `${rect.left + rect.width + 20}px`;
             $toc.style.maxWidth = `${$page.getBoundingClientRect().left - 20}px`;
-            const $tocLinkElements = $tocCore.getElementsByTagName('a');
+            $toc.style.visibility = 'visible';
+            const $tocLinkElements = $tocCore.querySelectorAll('a:first-child');
             const $tocLiElements = $tocCore.getElementsByTagName('li');
             const $headerLinkElements = document.getElementsByClassName('headerLink');
             const headerIsFixed = this.config.headerMode.desktop !== 'normal';
@@ -571,12 +588,7 @@ class Theme {
     }
 
     initSmoothScroll() {
-        if ((!this.util.isMobile() && this.config.headerMode.desktop === 'normal')
-          || (this.util.isMobile() && this.config.headerMode.mobile === 'normal')) {
-            new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true});
-        } else {
-            new SmoothScroll('[href^="#"]', {speed: 300, speedAsDuration: true, header: '#header-desktop'});
-        }
+        if (SmoothScroll) new SmoothScroll('[href^="#"]', { speed: 300, speedAsDuration: true, header: '#header-desktop' });
     }
 
     onScroll() {
@@ -626,7 +638,6 @@ class Theme {
                     this._resizeTimeout = null;
                     for (let event of this.resizeEventSet) event();
                     this.initToc();
-                    this.initSmoothScroll();
                     this.initMermaid();
                     this.initSearch();
                 }, 100);

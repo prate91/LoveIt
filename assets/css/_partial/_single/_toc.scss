@@ -13,13 +13,13 @@
       padding-left: .8rem;
       list-style: none;
 
-      a::before {
+      a:first-child::before {
         content: "|";
         font-weight: bolder;
         margin-right: .5rem;
         color: $single-link-color;
 
-        .dark & {
+        [theme=dark] & {
           color: $single-link-color-dark;
         }
       }
@@ -37,7 +37,7 @@
       color: $global-font-secondary-color;
     }
 
-    .dark & {
+    [theme=dark] & {
       background: $code-background-color-dark;
 
       rt {
@@ -53,15 +53,16 @@
   width: $MAX_LENGTH;
   padding: 0 .8rem;
   border-left: 4px solid $global-border-color;
-  overflow-wrap: break-word;
+  @include overflow-wrap(break-word);
   box-sizing: border-box;
   top: if($header-normal-mode-desktop, 5rem, 10rem);
-  left: $MAX_LENGTH;
+  left: 0;
+  visibility: hidden;
 
   @include blur;
 
-  .dark & {
-    border-left: 1px solid $global-border-color-dark;
+  [theme=dark] & {
+    border-left-color: $global-border-color-dark;
   }
 
   .toc-title {
@@ -91,14 +92,14 @@
       font-weight: bold;
       color: $single-link-color;
 
-      .dark & {
+      [theme=dark] & {
         color: $single-link-color-dark;
       }
 
       &::before {
         color: $single-link-hover-color;
 
-        .dark & {
+        [theme=dark] & {
           color: $single-link-hover-color-dark;
         }
       }
@@ -115,18 +116,10 @@
     justify-content: space-between;
     line-height: 2em;
     padding: 0 .75rem;
-    background: darken($code-background-color, 3%);
+    background: darken($code-background-color, 6%);
 
-    .dark & {
-      background: darken($code-background-color-dark, 3%);
-    }
-
-    &:hover {
-      background: darken($code-background-color, 6%);
-
-      .dark & {
-        background: darken($code-background-color-dark, 5%);
-      }
+    [theme=dark] & {
+      background: darken($code-background-color-dark, 6%);
     }
   }
 
@@ -138,8 +131,18 @@
       padding: .4rem 1rem .4rem 1.8rem;
     }
 
-    .dark & {
+    [theme=dark] & {
       background-color: $code-background-color-dark;
+    }
+  }
+
+  &.open {
+    .toc-title {
+      background: darken($code-background-color, 3%);
+
+      [theme=dark] & {
+        background: darken($code-background-color-dark, 3%);
+      }
     }
   }
 }

@@ -23,7 +23,7 @@ mapbox:
 
 <!--more-->
 
-## style
+## 1 style
 
 {{< version 0.2.0 changed >}}
 
@@ -50,11 +50,11 @@ This is a **right-aligned** paragraph.
 This is a **right-aligned** paragraph.
 {{< /style >}}
 
-## link
+## 2 link
 
 {{< version 0.2.0 >}}
 
-`link` shortcode 是 [Markdown 链接语法](../basic-markdown-syntax/#links) 的替代.
+`link` shortcode 是 [Markdown 链接语法](../basic-markdown-syntax#links) 的替代.
 `link` shortcode 可以提供一些其它的功能并且可以在代码块中使用.
 
 `link` shortcode 有以下命名参数:
@@ -115,11 +115,11 @@ This is a **right-aligned** paragraph.
 
 {{< link "https://github.com/upstage/" Upstage "Visit Upstage!" >}}
 
-## image
+## 3 image {#image}
 
 {{< version 0.2.0 changed >}}
 
-`image` shortcode 是 [`figure` shortcode](../theme-documentation-built-in-shortcodes/#figure) 的替代. `image` shortcode 可以充分利用 [lazysizes](https://github.com/aFarkas/lazysizes) 和 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 两个依赖库.
+`image` shortcode 是 [`figure` shortcode](../theme-documentation-built-in-shortcodes#figure) 的替代. `image` shortcode 可以充分利用 [lazysizes](https://github.com/aFarkas/lazysizes) 和 [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js) 两个依赖库.
 
 `image` shortcode 有以下命名参数:
 
@@ -185,7 +185,7 @@ This is a **right-aligned** paragraph.
 
 {{< image src="/images/theme-documentation-extended-shortcodes/lighthouse.jpg" caption="Lighthouse (`image`)" src-s="/images/theme-documentation-extended-shortcodes/lighthouse-small.jpg" src-l="/images/theme-documentation-extended-shortcodes/lighthouse-large.jpg" >}}
 
-## admonition
+## 4 admonition
 
 `admonition` shortcode 支持 **12** 种 帮助你在页面中插入提示的横幅.
 
@@ -249,35 +249,35 @@ This is a **right-aligned** paragraph.
 
     `admonition` 横幅的标题, 默认值是 **type** 参数的值.
 
-* **details** *[可选]* (**第三个**位置参数)
+* **open** *[可选]* (**第三个**位置参数) {{< version 0.2.0 changed >}}
 
-    横幅内容是否可展开/可折叠, 默认值是 `false`.
+    横幅内容是否默认展开, 默认值是 `true`.
 
 一个 `admonition` 示例:
 
 ```markdown
-{{</* admonition type=tip title="This is a tip" details=true */>}}
+{{</* admonition type=tip title="This is a tip" open=false */>}}
 一个 **技巧** 横幅
 {{</* /admonition */>}}
 或者
-{{</* admonition tip "This is a tip" true */>}}
+{{</* admonition tip "This is a tip" false */>}}
 一个 **技巧** 横幅
 {{</* /admonition */>}}
 ```
 
 呈现的输出效果如下:
 
-{{< admonition tip "This is a tip" true >}}
+{{< admonition tip "This is a tip" false >}}
 一个 **技巧** 横幅
 {{< /admonition >}}
 
-## mermaid
+## 5 mermaid
 
 [mermaid](https://mermaidjs.github.io/) 是一个可以帮助你在文章中生成图表和流程图的库, 类似 Markdown 的语法.
 
 只需将你的 mermaid 代码插入 `mermaid` shortcode 中即可.
 
-### 流程图 {#flowchart}
+### 5.1 流程图 {#flowchart}
 
 一个 **流程图** `mermaid` 示例:
 
@@ -301,7 +301,7 @@ graph LR;
     C -->|Two| E[Result two]
 {{< /mermaid >}}
 
-### 时序图 {#sequence-diagram}
+### 5.2 时序图 {#sequence-diagram}
 
 一个 **时序图** `mermaid` 示例:
 
@@ -337,7 +337,7 @@ sequenceDiagram
     Bob-->John: Jolly good!
 {{< /mermaid >}}
 
-### 甘特图 {#gantt}
+### 5.3 甘特图 {#gantt}
 
 一个 **甘特图** `mermaid` 示例:
 
@@ -381,7 +381,7 @@ gantt
     Add to mermaid                      :1d
 {{< /mermaid >}}
 
-### 类图 {#class-diagram}
+### 5.4 类图 {#class-diagram}
 
 一个 **类图** `mermaid` 示例:
 
@@ -423,7 +423,7 @@ classDiagram
     Class08 <--> C2: Cool label
 {{< /mermaid >}}
 
-### 状态图 {#state-diagram}
+### 5.5 状态图 {#state-diagram}
 
 一个 **状态图** `mermaid` 示例:
 
@@ -451,7 +451,7 @@ stateDiagram
     Crash --> [*]
 {{< /mermaid >}}
 
-### Git 图 {#git-graph}
+### 5.6 Git 图 {#git-graph}
 
 一个 **Git 图** `mermaid` 示例:
 
@@ -497,7 +497,7 @@ end
     merge newbranch
 {{< /mermaid >}}
 
-### 饼图 {#pie}
+### 5.7 饼图 {#pie}
 
 一个 **饼图** `mermaid` 示例:
 
@@ -519,7 +519,7 @@ pie
     "Rats" : 15
 {{< /mermaid >}}
 
-## echarts
+## 6 echarts
 
 [ECharts](https://echarts.apache.org/) 是一个帮助你生成交互式数据可视化的库.
 
@@ -907,7 +907,7 @@ data = [
 
     {{< version 0.2.0 >}} 数据可视化的高度, 默认值是 `30rem`.
 
-## mapbox
+## 7 mapbox
 
 {{< version 0.2.0 >}}
 
@@ -933,27 +933,27 @@ data = [
 
 * **light-style** *[可选]* (**第五个**位置参数)
 
-    浅色主题的地图样式, 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+    浅色主题的地图样式, 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **dark-style** *[可选]* (**第六个**位置参数)
 
-    深色主题的地图样式, 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+    深色主题的地图样式, 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **navigation** *[可选]*
 
-    是否添加 [NavigationControl](https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol), 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+    是否添加 [NavigationControl](https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **geolocate** *[可选]*
 
-    是否添加 [GeolocateControl](https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol), 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+    是否添加 [GeolocateControl](https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **scale** *[可选]*
 
-    是否添加 [ScaleControl](https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol), 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+    是否添加 [ScaleControl](https://docs.mapbox.com/mapbox-gl-js/api#scalecontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **fullscreen** *[可选]*
 
-   是否添加 [FullscreenControl](https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol), 默认值是[前置参数](../theme-documentation-content/#front-matter)或者[网站配置](../theme-documentation-basics/#site-configuration)中设置的值.
+   是否添加 [FullscreenControl](https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol), 默认值是[前置参数](../theme-documentation-content#front-matter)或者[网站配置](../theme-documentation-basics#site-configuration)中设置的值.
 
 * **width** *[可选]*
 
@@ -963,13 +963,21 @@ data = [
 
     地图的高度, 默认值是 `20rem`.
 
-一个 `mapbox` 示例:
+一个简单的 `mapbox` 示例:
 
 ```markdown
 {{</* mapbox 121.485 31.233 12 */>}}
 或者
 {{</* mapbox lng=121.485 lat=31.233 zoom=12 */>}}
+```
 
+呈现的输出效果如下:
+
+{{< mapbox 121.485 31.233 12 >}}
+
+一个带有自定义样式的 `mapbox` 示例:
+
+```markdown
 {{</* mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/streets-zh-v1" */>}}
 或者
 {{</* mapbox lng=-122.252 lat=37.453 zoom=10 marked=false light-style="mapbox://styles/mapbox/streets-zh-v1" */>}}
@@ -977,17 +985,15 @@ data = [
 
 呈现的输出效果如下:
 
-{{< mapbox 121.485 31.233 12 >}}
-
 {{< mapbox -122.252 37.453 10 false "mapbox://styles/mapbox/streets-zh-v1?optimize=true" >}}
 
-## music
+## 8 music
 
 `music` shortcode 基于 [APlayer](https://github.com/MoePlayer/APlayer) 和 [MetingJS](https://github.com/metowolf/MetingJS) 提供了一个内嵌的响应式音乐播放器.
 
 有三种方式使用 `music` shortcode.
 
-### 自定义音乐 URL {#custom-music-url}
+### 8.1 自定义音乐 URL {#custom-music-url}
 
 `music` shortcode 有以下命名参数来使用自定义音乐 URL:
 
@@ -1010,14 +1016,14 @@ data = [
 一个使用自定义音乐 URL 的 `music` 示例:
 
 ```markdown
-{{</* music url="https://rainymood.com/audio1110/0.m4a" name=rainymood artist=rainymood cover="https://rainymood.com/i/badge.jpg" */>}}
+{{</* music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/theme-documentation-extended-shortcodes/Wavelength.jpg" */>}}
 ```
 
 呈现的输出效果如下:
 
-{{< music url="https://rainymood.com/audio1110/0.m4a" name=rainymood artist=rainymood cover="https://rainymood.com/i/badge.jpg" >}}
+{{< music url="/music/Wavelength.mp3" name=Wavelength artist=oldmanyoung cover="/images/theme-documentation-extended-shortcodes/Wavelength.jpg" >}}
 
-### 音乐平台 URL 的自动识别 {#automatic-identification}
+### 8.2 音乐平台 URL 的自动识别 {#automatic-identification}
 
 `music` shortcode 有一个命名参数来使用音乐平台 URL 的自动识别:
 
@@ -1037,7 +1043,7 @@ data = [
 
 {{< music auto="https://music.163.com/#/playlist?id=60198" >}}
 
-### 自定义音乐平台, 类型和 ID {#custom-server}
+### 8.3 自定义音乐平台, 类型和 ID {#custom-server}
 
 `music` shortcode 有以下命名参数来使用自定义音乐平台:
 
@@ -1069,7 +1075,7 @@ data = [
 
 {{< music netease song 1868553 >}}
 
-### 其它参数 {#other-parameters}
+### 8.4 其它参数 {#other-parameters}
 
 `music` shortcode 有一些可以应用于以上三种方式的其它命名参数:
 
@@ -1119,7 +1125,7 @@ data = [
 
     音乐列表的最大高度, 默认值是 `340px`.
 
-## bilibili
+## 9 bilibili
 
 {{< version 0.2.0 changed >}}
 
@@ -1161,13 +1167,13 @@ https://www.bilibili.com/video/BV1TJ411C7An?p=3
 
 {{< bilibili id=BV1TJ411C7An p=3 >}}
 
-## typeit
+## 10 typeit
 
 `typeit` shortcode 基于 [TypeIt](https://typeitjs.com/) 提供了打字动画.
 
 只需将你需要打字动画的内容插入 `typeit` shortcode 中即可.
 
-### 简单内容 {#simple-content}
+### 10.1 简单内容 {#simple-content}
 
 允许使用 `Markdown` 格式的简单内容, 并且 **不包含** 富文本的块内容, 例如图像等等...
 
@@ -1201,7 +1207,7 @@ https://www.bilibili.com/video/BV1TJ411C7An?p=3
 这一个带有基于 [TypeIt](https://typeitjs.com/) 的 **打字动画** 的 *段落*...
 {{< /typeit >}}
 
-### 代码内容 {#code-content}
+### 10.2 代码内容 {#code-content}
 
 代码内容也是允许的, 并且通过使用参数 `code` 指定语言类型可以实习语法高亮.
 
@@ -1227,7 +1233,7 @@ public class HelloWorld {
 }
 {{< /typeit >}}
 
-### 分组内容 {#code-content}
+### 10.3 分组内容 {#code-content}
 
 默认情况下, 所有打字动画都是同时开始的.
 但是有时你可能需要按顺序开始一组 `typeit` 内容的打字动画.

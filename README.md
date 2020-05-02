@@ -9,7 +9,7 @@ English README | [简体中文说明](https://github.com/dillonzq/LoveIt/blob/ma
 
 > **LoveIt** is a **clean**, **elegant** but **advanced** blog theme for [Hugo](https://gohugo.io/).
 
-It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt/) and [KeepIt Theme](https://github.com/liuzc/LeaveIt/).
+It is based on the original [LeaveIt Theme](https://github.com/liuzc/LeaveIt) and [KeepIt Theme](https://github.com/liuzc/LeaveIt).
 
 Since the three themes have a similar look, if you have questions about their differences,
 read [Why choose LoveIt](#why-choose-loveit) so that you can choose the one that works best for you.
@@ -113,14 +113,13 @@ I hope you will LoveIt ❤️!
 * **Dynamic scroll** supported by [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * ...
 
-## Documentation
+## [Documentation](https://hugoloveit.com/categories/documentation/)
 
-* [Documentation Page](https://hugoloveit.com/categories/documentation/)
-* Build Documentation Locally:
+Build Documentation Locally:
 
-    ```bash
-    hugo server --source=exampleSite
-    ```
+```bash
+hugo server --source=exampleSite
+```
 
 ## Multilingual and i18n
 
@@ -131,7 +130,12 @@ LoveIt supports the following languages:
 * French
 * Polish
 * Brazilian Portuguese
+* Italian
 * [Contribute with a new language](https://github.com/dillonzq/LoveIt/pulls)
+
+[Languages Compatibility](https://hugoloveit.com/theme-documentation-basics/#language-compatibility)
+
+## [Roadmap](https://github.com/dillonzq/LoveIt/projects/1)
 
 ## Questions, ideas, bugs, pull requests
 
@@ -152,6 +156,7 @@ Thanks to the authors of following resources included in the theme:
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
+* [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)

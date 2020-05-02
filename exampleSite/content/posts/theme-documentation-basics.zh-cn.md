@@ -29,7 +29,7 @@ toc:
 直接安装满足你操作系统 (**Windows**, **Linux**, **macOS**) 的最新版本 [:(far fa-file-archive fa-fw): Hugo extended (> 0.62.0)](https://gohugo.io/getting-started/installing/).
 
 {{< admonition note "为什么不支持早期版本的 Hugo?" >}}
-由于 [Markdown 渲染钩子函数](https://gohugo.io/getting-started/configuration-markup/#markdown-render-hooks) 在 [Hugo 圣诞节版本](https://gohugo.io/news/0.62.0-relnotes/) 中被引入, 本主题只支持高于 **0.62.0** 的 Hugo 版本.
+由于 [Markdown 渲染钩子函数](https://gohugo.io/getting-started/configuration-markup#markdown-render-hooks) 在 [Hugo 圣诞节版本](https://gohugo.io/news/0.62.0-relnotes/) 中被引入, 本主题只支持高于 **0.62.0** 的 Hugo 版本.
 {{< /admonition >}}
 
 {{< admonition note "为什么需要 Hugo extended 版本?" >}}
@@ -184,9 +184,7 @@ hugo
 
 除了 [Hugo 全局配置](https://gohugo.io/overview/configuration/) 和 [菜单配置](#basic-configuration) 之外, **LoveIt** 主题还允许您在网站配置中定义以下参数 (这是一个示例 `config.toml`, 其内容为默认值).
 
-{{< admonition >}}
-请注意, 本文档其他部分将详细解释其中一些参数.
-{{< /admonition >}}
+请打开下面的代码块查看完整的示例配置 :(far fa-hand-point-down fa-fw)::
 
 ```toml
 [params]
@@ -226,10 +224,18 @@ hugo
     enable = true
     # 搜索引擎的类型 ("lunr", "algolia")
     type = "lunr"
-    # 文章内容索引长度
-    contentLength = 5000
+    # 文章内容最长索引长度
+    contentLength = 4000
     # 搜索框的占位提示语
     placeholder = ""
+    # {{< version 0.2.1 >}} 最大结果数目
+    maxResultLength = 10
+    # {{< version 0.2.3 >}} 结果内容片段长度
+    snippetLength = 50
+    # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
+    highlightTag = "em"
+    # {{< version 0.2.4 >}} 是否在搜索索引中使用基于 baseURL 的绝对路径
+    absoluteURL = false
     [params.search.algolia]
       index = ""
       appID = ""
@@ -241,6 +247,16 @@ hugo
     desktopMode = "fixed"
     # 移动端导航栏模式 ("fixed", "normal", "auto")
     mobileMode = "auto"
+    # {{< version 0.2.0 >}} 页面头部导航栏标题配置
+    [params.header.title]
+      # LOGO 的 URL
+      logo = ""
+      # 标题名称
+      name = ""
+      # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
+      pre = ""
+      # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
+      post = ""
 
   # 页面底部信息配置
   [params.footer]
@@ -381,7 +397,7 @@ hugo
     # {{< version 0.2.0 >}} 是否使用 twemoji
     twemoji = false
     # 是否使用 lightgallery
-    lightgallery = true
+    lightgallery = false
     # {{< version 0.2.0 >}} 是否使用 ruby 扩展语法
     ruby = true
     # {{< version 0.2.0 >}} 是否使用 fraction 扩展语法
@@ -390,6 +406,8 @@ hugo
     fontawesome = true
     # 是否在文章页面显示原始 Markdown 文档链接
     linkToMarkdown = true
+    # {{< version 0.2.4 >}} 是否在 RSS 中显示全文内容
+    rssFullText = false
     # {{< version 0.2.0 >}} 目录配置
     [params.page.toc]
       # 是否使用目录
@@ -423,44 +441,44 @@ hugo
       lightStyle = "mapbox://styles/mapbox/light-v9"
       # 深色主题的地图样式
       darkStyle = "mapbox://styles/mapbox/dark-v9"
-      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#navigationcontrol" NavigationControl >}}
+      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#navigationcontrol" NavigationControl >}}
       navigation = true
-      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#geolocatecontrol" GeolocateControl >}}
+      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#geolocatecontrol" GeolocateControl >}}
       geolocate = true
-      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#scalecontrol" ScaleControl >}}
+      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#scalecontrol" ScaleControl >}}
       scale = true
-      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api/#fullscreencontrol" FullscreenControl >}}
+      # 是否添加 {{< link "https://docs.mapbox.com/mapbox-gl-js/api#fullscreencontrol" FullscreenControl >}}
       fullscreen = true
     # {{< version 0.2.0 changed >}} 文章页面的分享信息设置
     [params.page.share]
       enable = true
       Twitter = true
       Facebook = true
-      # Linkedin = true
-      # Whatsapp = true
-      # Pinterest = true
-      # Tumblr = true
-      # HackerNews = true
-      # Reddit = true
-      # VK = true
-      # Buffer = true
-      # Xing = true
-      # Line = true
-      # Instapaper = true
-      # Pocket = true
-      # Digg = true
-      # Stumbleupon = true
-      # Flipboard = true
+      Linkedin = false
+      Whatsapp = true
+      Pinterest = false
+      Tumblr = false
+      HackerNews = false
+      Reddit = false
+      VK = false
+      Buffer = false
+      Xing = false
+      Line = true
+      Instapaper = false
+      Pocket = false
+      Digg = false
+      Stumbleupon = false
+      Flipboard = false
       Weibo = true
-      # Renren = true
-      # Myspace = true
-      # Blogger = true
-      # Baidu = true
-      # Odnoklassniki = true
+      Renren = false
+      Myspace = true
+      Blogger = true
+      Baidu = false
+      Odnoklassniki = false
       Evernote = true
-      # Skype = true
-      # Trello = true
-      # Mix = true
+      Skype = false
+      Trello = false
+      Mix = false
     # {{< version 0.2.0 changed >}} 评论系统设置
     [params.page.comment]
       enable = true
@@ -483,13 +501,16 @@ hugo
         enable = false
         appId = ""
         appKey = ""
-        placeholder = "Your comment ..."
+        placeholder = ""
         avatar = "mp"
         meta= ""
         pageSize = 10
-        lang = "en"
+        lang = ""
         visitor = true
         recordIP = true
+        highlight = true
+        enableQQ = false
+        serverURLs = ""
       # {{< link "https://developers.facebook.com/docs/plugins/comments" "Facebook 评论系统" >}}设置
       [params.page.comment.facebook]
         enable = false
@@ -557,62 +578,66 @@ hugo
   # CSS 和 JS 文件的 CDN 设置
   [params.cdn]
     # {{< version 0.2.0 >}} {{< link "https://github.com/necolas/normalize.css" "normalize.css" >}}@8.0.1
-    normalizeCSS = ''
+    normalizeCSS = ""
     # {{< link "https://fontawesome.com/" "fontawesome-free" >}}@5.13.0
-    fontawesomeFreeCSS = ''
+    fontawesomeFreeCSS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/simple-icons/simple-icons" "simple-icons" >}}@2.9.0
-    # ('https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/')
-    simpleIconsPrefix = ''
+    # ("https://cdn.jsdelivr.net/npm/simple-icons@v2/icons/")
+    simpleIconsPrefix = ""
     # animate.css@3.7.2 https://github.com/daneden/animate.css
-    animateCSS = ''
+    animateCSS = ""
     # {{< link "https://github.com/cferdinandi/smooth-scroll" "smooth-scroll" >}}@16.1.3
-    smoothScrollJS = ''
+    smoothScrollJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/autocomplete.js" "autocomplete.js" >}}@0.37.1
-    autocompleteJS = ''
+    autocompleteJS = ""
     # {{< version 0.2.0 >}} {{< link "https://lunrjs.com/" "lunr.js" >}}@2.3.8
-    lunrJS = ''
+    lunrJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/algolia/algoliasearch-client-javascript" "algoliasearch" >}}@4.2.0
-    algoliasearchJS = ''
+    algoliasearchJS = ""
     # {{< link "https://github.com/aFarkas/lazysizes" "lazysizes" >}}@5.2.0
-    lazysizesJS = ''
+    lazysizesJS = ""
+    # {{< version 0.2.3 >}} {{< link "https://github.com/fregante/object-fit-images" "object-fit-images" >}}@3.2.4
+    objectFitImagesJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/twitter/twemoji" "twemoji" >}}@12.1.5
-    twemojiJS = ''
-    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3 lg-thumbnail@1.1.0 lg-zoom@1.1.0
-    lightgalleryCSS = ''
-    lightgalleryJS = ''
-    lightgalleryThumbnailJS = ''
-    lightgalleryZoomJS = ''
+    twemojiJS = ""
+    # {{< link "https://github.com/sachinchoolur/lightgallery.js" "lightgallery.js" >}}@1.1.3
+    # {{< link "https://github.com/sachinchoolur/lg-thumbnail.js" "lg-thumbnail.js" >}}@1.1.0
+    # {{< link "https://github.com/sachinchoolur/lg-zoom.js" "lg-zoom.js" >}}@1.0.1
+    lightgalleryCSS = ""
+    lightgalleryJS = ""
+    lightgalleryThumbnailJS = ""
+    lightgalleryZoomJS = ""
     # {{< version 0.2.0 >}} {{< link "https://github.com/zenorocha/clipboard.js" "clipboard.js" >}}@2.0.6
-    clipboardJS = ''
+    clipboardJS = ""
     # {{< link "https://github.com/ellisonleao/sharer.js" "sharer.js" >}}@0.4.0
-    sharerJS = ''
-    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@7.0.3
-    typeitJS = ''
+    sharerJS = ""
+    # {{< link "https://github.com/alexmacarthur/typeit" "typeit" >}}@6.5.1
+    typeitJS = ""
     # {{< link "https://github.com/KaTeX/KaTeX" "katex" >}}@0.11.1
-    katexCSS = ''
-    katexJS = ''
-    katexAutoRenderJS = ''
-    katexCopyTexCSS = ''
-    katexCopyTexJS = ''
-    katexMhchemJS = ''
+    katexCSS = ""
+    katexJS = ""
+    katexAutoRenderJS = ""
+    katexCopyTexCSS = ""
+    katexCopyTexJS = ""
+    katexMhchemJS = ""
     # {{< link "https://github.com/knsv/mermaid" "mermaid" >}}@8.5.0
-    mermaidJS = ''
+    mermaidJS = ""
     # {{< link "https://echarts.apache.org/" "echarts" >}}@4.7.0
-    echartsJS = ''
-    echartsMacaronsJS = ''
-    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.9.1
-    mapboxGLCSS = ''
-    mapboxGLJS = ''
+    echartsJS = ""
+    echartsMacaronsJS = ""
+    # {{< version 0.2.0 >}} {{< link "https://docs.mapbox.com/mapbox-gl-js" mapbox-gl >}}@1.10.0
+    mapboxGLCSS = ""
+    mapboxGLJS = ""
     # {{< link "https://github.com/MoePlayer/APlayer" "aplayer" >}}@1.10.1
-    aplayerCSS = ''
-    aplayerJS = ''
+    aplayerCSS = ""
+    aplayerJS = ""
     # {{< link "https://github.com/metowolf/MetingJS" "meting" >}}@2.0.1
-    metingJS = ''
+    metingJS = ""
     # {{< link "https://github.com/gitalk/gitalk" "gitalk" >}}@1.6.2
-    gitalkCSS = ''
-    gitalkJS = ''
-    # {{< link "https://valine.js.org/" "valine" >}}@1.4.9
-    valineJS = ''
+    gitalkCSS = ""
+    gitalkJS = ""
+    # {{< link "https://valine.js.org/" "valine" >}}@1.4.14
+    valineJS = ""
 
 # Hugo 解析文档的配置
 [markup]
@@ -655,7 +680,7 @@ hugo
   filename = "sitemap.xml"
   priority = 0.5
 
-# {{< link "https://gohugo.io/content-management/urls/#permalinks" "Permalinks 配置" >}}
+# {{< link "https://gohugo.io/content-management/urls#permalinks" "Permalinks 配置" >}}
 [Permalinks]
   # posts = ":year/:month/:filename"
   posts = ":filename"
@@ -690,6 +715,20 @@ hugo
   taxonomy = ["HTML", "RSS"]
   taxonomyTerm = ["HTML"]
 ```
+
+{{< admonition >}}
+请注意, 本文档其他部分将详细解释其中一些参数.
+{{< /admonition >}}
+
+{{< admonition note "Hugo 的运行环境" >}}
+`hugo serve` 的默认运行环境是 `development`,
+而 `hugo` 的默认运行环境是 `production`.
+
+由于本地 `development` 环境的限制,
+**评论系统**, **CDN** 和 **fingerprint** 不会在 `development` 环境下启用.
+
+你可以使用 `hugo serve -e production` 命令来开启这些特性.
+{{< /admonition >}}
 
 {{< admonition tip "关于 CDN 配置的技巧" >}}
 在 CDN 的配置中, 完整的 HTML 标签和 URL 都是支持的:
@@ -778,6 +817,8 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 
 ### 4.1 兼容性 {#language-compatibility}
 
+{{< version 0.2.0 changed >}}
+
 | 语言 | Hugo 代码 | HTML `lang` 属性 | 主题文档 | Lunr.js 支持 |
 |:---- |:----:|:----:|:----:|:----:|
 | 英语 | `en` | `en` | :(far fa-check-square fa-fw): | :(far fa-check-square fa-fw): |
@@ -785,8 +826,7 @@ $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospac
 | 法语 | `fr` | `fr` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 | 波兰语 | `pl` | `pl` | :(far fa-square fa-fw): | :(far fa-square fa-fw): |
 | 巴西葡萄牙语 | `pt-br` | `pt-BR` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
-
-:(far fa-kiss-wink-heart fa-fw): **请自由地[贡献代码](https://github.com/dillonzq/LoveIt/pulls)!**
+| 意大利语 | `it` | `it` | :(far fa-square fa-fw): | :(far fa-check-square fa-fw): |
 
 ### 4.2 基本配置
 
@@ -906,7 +946,7 @@ defaultContentLanguage = "zh-cn"
 {{< /admonition >}}
 
 {{< admonition tip >}}
-也可以使用 [文章前置参数](https://gohugo.io/content-management/multilingual/#translate-your-content) 来翻译网址.
+也可以使用 [文章前置参数](https://gohugo.io/content-management/multilingual#translate-your-content) 来翻译网址.
 {{< /admonition >}}
 
 ### 4.3 修改默认的翻译字符串
@@ -916,13 +956,13 @@ defaultContentLanguage = "zh-cn"
 
 要覆盖默认值, 请在你项目的 i18n 目录 `i18n/<languageCode>.toml` 中创建一个新文件，并从 `themes/LoveIt/i18n/en.toml` 中获得提示.
 
-另外, 由于你的翻译可能会帮助到其他人, 请花点时间通过 [创建一个 PR](https://github.com/dillonzq/LoveIt/pulls) 来贡献主题翻译, 谢谢!
+另外, 由于你的翻译可能会帮助到其他人, 请花点时间通过 [:(fas fa-code-branch fa-fw): 创建一个 PR](https://github.com/dillonzq/LoveIt/pulls) 来贡献主题翻译, 谢谢!
 
 ## 5 搜索
 
 {{< version 0.2.0 >}}
 
-基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/), **LoveIt** 主支持搜索功能.
+基于 [Lunr.js](https://lunrjs.com/) 或 [algolia](https://www.algolia.com/), **LoveIt** 主题支持搜索功能.
 
 ### 5.1 输出配置
 
@@ -942,22 +982,38 @@ defaultContentLanguage = "zh-cn"
 ```toml
 [params.search]
   enable = true
-  # type of search engine ("lunr", "algolia")
+  # 搜索引擎的类型 ("lunr", "algolia")
   type = "lunr"
-  # index length of the content
-  contentLength = 5000
+  # 文章内容最长索引长度
+  contentLength = 4000
+  # 搜索框的占位提示语
+  placeholder = ""
+  # {{< version 0.2.1 >}} 最大结果数目
+  maxResultLength = 10
+  # {{< version 0.2.3 >}} 结果内容片段长度
+  snippetLength = 50
+  # {{< version 0.2.1 >}} 搜索结果中高亮部分的 HTML 标签
+  highlightTag = "em"
+  # {{< version 0.2.4 >}} 是否在搜索索引中使用基于 baseURL 的绝对路径
+  absoluteURL = false
   [params.search.algolia]
     index = ""
     appID = ""
     searchKey = ""
 ```
 
-{{< admonition note "怎样选择搜索引擎的类型?" >}}
+{{< admonition note "怎样选择搜索引擎?" >}}
+以下是两种搜索引擎的对比:
+
 * `lunr`: 简单, 无需同步 `index.json`, 没有 `contentLength` 的限制, 但占用带宽大且性能低 (特别是中文需要一个较大的分词依赖库)
 * `algolia`: 高性能并且占用带宽低, 但需要同步 `index.json` 且有 `contentLength` 的限制
+
+{{< version 0.2.3 >}} 文章内容被 `h2` 和 `h3` HTML 标签切分来提供查询效果并且基本实现全文搜索.
+`contentLength` 用来限制 `h2` 和 `h3` HTML 标签开头的内容部分的最大长度.
 {{< /admonition >}}
 
 {{< admonition tip "关于 algolia 的使用技巧" >}}
-你需要上传 `index.json` 到 algolia 来激活搜索功能. 你可以使用浏览器来上传 `index.json` 文件但是一个自动化的脚本可能是更好的选择.
+你需要上传 `index.json` 到 algolia 来激活搜索功能. 你可以使用浏览器来上传 `index.json` 文件但是一个自动化的脚本可能效果更好.
+[Algolia Atomic](https://github.com/chrisdmacrae/atomic-algolia) 是一个不错的选择.
 为了兼容 Hugo 的多语言模式, 你需要上传不同语言的 `index.json` 文件到对应的 algolia index, 例如 `zh-cn/index.json` 或 `fr/index.json`...
 {{< /admonition >}}

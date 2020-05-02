@@ -3,15 +3,22 @@ header {
   z-index: 150;
   background-color: $header-background-color;
 
-  .dark & {
+  [theme=dark] & {
     background-color: $header-background-color-dark;
   }
 
   .logo {
-    min-height: 1.25em;
-    height: 1.25em;
+    min-height: 1.5em;
+    height: 1.5em;
     vertical-align: text-bottom;
+  }
+
+  .logo, .header-title-pre {
     padding-right: .25rem;
+  }
+
+  .header-title-post {
+    padding-left: .25rem;
   }
 }
 
@@ -26,7 +33,7 @@ header {
 .header-title {
   font-family: $header-title-font-family;
   font-weight: bold;
-  margin: 0 .5rem;
+  margin-right: .5rem;
   min-width: 10%;
   overflow: hidden;
   white-space: nowrap;
@@ -66,7 +73,7 @@ header {
     vertical-align: baseline !important;
     @include transition(width 0.3s ease);
 
-    .dark & {
+    [theme=dark] & {
       background-color: $header-background-color-dark;
     }
   }
@@ -100,7 +107,7 @@ header {
       padding: 0 2rem 0 2rem;
     }
 
-    .dark & {
+    [theme=dark] & {
       input {
         color: $global-font-color-dark;
         background-color: $search-background-color-dark;
@@ -114,7 +121,7 @@ header {
     .search-button {
       color: $global-font-secondary-color;
 
-      .dark & {
+      [theme=dark] & {
         color: $global-font-secondary-color-dark;
       }
     }
@@ -140,7 +147,7 @@ header {
   line-height: $header-height;
 
   .header-wrapper {
-    padding: 0 10vw;
+    padding: 0 2rem 0 10vh;
 
     .header-title {
       font-size: $header-title-font-size;
@@ -160,7 +167,7 @@ header {
         &.delimiter {
           border-left: 1.5px solid $global-font-color;
 
-          .dark & {
+          [theme=dark] & {
             border-left-color: $global-border-color-dark;
           }
         }
@@ -178,7 +185,7 @@ header {
         font-weight: 900;
         color: $header-hover-color;
 
-        .dark & {
+        [theme=dark] & {
           color: $header-hover-color-dark;
         }
       }
@@ -227,7 +234,7 @@ header {
           @include border-radius(3px);
           @include transition(all 0.3s ease-in-out);
 
-          .dark & {
+          [theme=dark] & {
             background: $global-font-color-dark;
           }
         }
@@ -281,6 +288,10 @@ header {
         }
       }
 
+      .search-button {
+        top: 0;
+      }
+
       .search-cancel {
         display: none;
         margin-left: .75rem;
@@ -295,7 +306,7 @@ header {
         display: block;
       }
 
-      .dark & {
+      [theme=dark] & {
         background: $header-background-color-dark;
         border-top-color: $global-border-color-dark;
       }
@@ -329,7 +340,7 @@ header {
   @include box-shadow(0 .125rem .25rem rgba(0, 0, 0, .1));
 
   &.desktop {
-    right: 10vw;
+    right: 2rem;
     width: 30rem;
   }
 
@@ -342,7 +353,7 @@ header {
     right: 0 !important;
     background-color: $global-background-color;
 
-    .dark & {
+    [theme=dark] & {
       background-color: $global-background-color-dark;
     }
 
@@ -369,7 +380,7 @@ header {
           text-align: right;
           color: $global-font-secondary-color;
 
-          .dark & {
+          [theme=dark] & {
             color: $global-font-secondary-color-dark;
           }
         }
@@ -380,10 +391,10 @@ header {
           -webkit-line-clamp: 2;
           overflow: hidden;
           text-overflow: ellipsis;
-          overflow-wrap: break-word;
+          @include overflow-wrap(break-word);
           color: $global-font-secondary-color;
 
-          .dark & {
+          [theme=dark] & {
             color: $global-font-secondary-color-dark;
           }
         }
@@ -392,7 +403,7 @@ header {
           font-style: normal;
           background-color: $selection-color;
 
-          .dark & {
+          [theme=dark] & {
             background-color: $selection-color-dark;
           }
         }
@@ -400,7 +411,7 @@ header {
         &.cursor {
           background: darken($code-background-color, 5%);
 
-          .dark & {
+          [theme=dark] & {
             background: lighten($code-background-color-dark, 5%);
           }
         }
@@ -418,7 +429,7 @@ header {
       .search-query {
         font-weight: bold;
 
-        .dark & {
+        [theme=dark] & {
           color: #ddd;
         }
       }
@@ -430,7 +441,7 @@ header {
       font-size: .8rem;
       color: $global-font-secondary-color;
 
-      .dark {
+      [theme=dark] {
         color: $global-font-secondary-color-dark;
       }
 

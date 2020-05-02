@@ -9,7 +9,7 @@
 
 > [LoveIt](https://github.com/dillonzq/LoveIt) 是一个**简洁**、**优雅**且**高效**的 [Hugo](https://gohugo.io/) 博客主题。
 
-它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt/) 和 [KeepIt 主题](https://github.com/liuzc/LeaveIt/)。
+它的原型基于 [LeaveIt 主题](https://github.com/liuzc/LeaveIt) 和 [KeepIt 主题](https://github.com/liuzc/LeaveIt)。
 
 由于三个主题外观的相似性，如果你对于它们的不同之处有疑问，请阅读 [为什么选择 LoveIt](#为什么选择-LoveIt)，以便你能选择最适合你的一个。
 
@@ -108,14 +108,13 @@
 * 支持基于 [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) 的**滚动动画**
 * ...
 
-## 文档
+## [文档](https://hugoloveit.com/zh-cn/categories/documentation/)
 
-* [文档页面](https://hugoloveit.com/zh-cn/categories/documentation/)
-* 在本地构建文档:
+在本地构建文档:
 
-    ```bash
-    hugo server --source=exampleSite
-    ```
+```bash
+hugo server --source=exampleSite
+```
 
 ## 多语言和国际化
 
@@ -126,7 +125,12 @@ LoveIt 支持下列语言:
 * 法语
 * 波兰语
 * 巴西葡萄牙语
+* 意大利语
 * [贡献一种新的语言](https://github.com/dillonzq/LoveIt/pulls)
+
+[语言兼容性](https://hugoloveit.com/zh-cn/theme-documentation-basics/#language-compatibility)
+
+## [路线图](https://github.com/dillonzq/LoveIt/projects/1)
 
 ## 问题、想法、 bugs 和 PRs
 
@@ -147,6 +151,7 @@ LoveIt 主题中用到了以下项目，感谢它们的作者：
 * [Lunr.js](https://lunrjs.com/)
 * [algoliasearch](https://github.com/algolia/algoliasearch-client-javascript)
 * [lazysizes](https://github.com/aFarkas/lazysizes)
+* [object-fit-images](https://github.com/fregante/object-fit-images)
 * [Twemoji](https://github.com/twitter/twemoji)
 * [lightgallery.js](https://github.com/sachinchoolur/lightgallery.js)
 * [clipboard.js](https://github.com/zenorocha/clipboard.js)

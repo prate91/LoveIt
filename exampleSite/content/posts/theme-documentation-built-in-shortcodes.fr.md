@@ -21,7 +21,7 @@ lightgallery: true
 
 {{< admonition warning >}}
 Sorry, this article has not been completely translated into **French**.
-Welcome to take the time to propose a translation by [making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
+Welcome to take the time to propose a translation by [:(fas fa-code-branch fa-fw): making a PR](https://github.com/dillonzq/LoveIt/pulls) to the theme!
 {{< /admonition >}}
 
 Hugo uses Markdown for its simple content format. However, there are a lot of things that Markdown doesn’t support well. You could use pure HTML to expand possibilities.
@@ -33,9 +33,9 @@ A shortcode is a simple snippet that can generate reasonable HTML code and confo
 
 Hugo ships with a set of predefined shortcodes that represent very common usage. These shortcodes are provided for author convenience and to keep your markdown content clean.
 
-## figure {#figure}
+## 1 figure {#figure}
 
-[Documentation of `figure`](https://gohugo.io/content-management/shortcodes/#figure)
+[Documentation of `figure`](https://gohugo.io/content-management/shortcodes#figure)
 
 Example `figure` input:
 
@@ -58,9 +58,9 @@ The HTML looks like this:
 </figure>
 ```
 
-## gist
+## 2 gist
 
-[Documentation of `gist`](https://gohugo.io/content-management/shortcodes/#gist)
+[Documentation of `gist`](https://gohugo.io/content-management/shortcodes#gist)
 
 Example `gist` input:
 
@@ -78,9 +78,9 @@ The HTML looks like this:
 <script type="application/javascript" src="https://gist.github.com/spf13/7896402.js"></script>
 ```
 
-## highlight
+## 3 highlight
 
-[Documentation of `highlight`](https://gohugo.io/content-management/shortcodes/#instagram)
+[Documentation of `highlight`](https://gohugo.io/content-management/shortcodes#instagram)
 
 Example `highlight` input:
 
@@ -110,9 +110,9 @@ The rendered output looks like this:
 </section>
 {{< /highlight >}}
 
-## instagram
+## 4 instagram
 
-[Documentation of `instagram`](https://gohugo.io/content-management/shortcodes/#instagram)
+[Documentation of `instagram`](https://gohugo.io/content-management/shortcodes#instagram)
 
 Example `instagram` input:
 
@@ -124,9 +124,9 @@ The rendered output looks like this:
 
 {{< instagram BWNjjyYFxVx hidecaption >}}
 
-## param
+## 5 param
 
-[Documentation of `param`](https://gohugo.io/content-management/shortcodes/#param)
+[Documentation of `param`](https://gohugo.io/content-management/shortcodes#param)
 
 Example `param` input:
 
@@ -138,13 +138,13 @@ The rendered output looks like this:
 
 {{< param description >}}
 
-## ref and relref {#ref-and-relref}
+## 6 ref and relref {#ref-and-relref}
 
-[Documentation of `ref` and `relref`](https://gohugo.io/content-management/shortcodes/#ref-and-relref)
+[Documentation of `ref` and `relref`](https://gohugo.io/content-management/shortcodes#ref-and-relref)
 
-## tweet
+## 7 tweet
 
-[Documentation of `tweet`](https://gohugo.io/content-management/shortcodes/#tweet)
+[Documentation of `tweet`](https://gohugo.io/content-management/shortcodes#tweet)
 
 Example `tweet` input:
 
@@ -156,9 +156,9 @@ The rendered output looks like this:
 
 {{< tweet 877500564405444608 >}}
 
-## vimeo
+## 8 vimeo
 
-[Documentation of `vimeo`](https://gohugo.io/content-management/shortcodes/#vimeo)
+[Documentation of `vimeo`](https://gohugo.io/content-management/shortcodes#vimeo)
 
 Example `vimeo` input:
 
@@ -170,9 +170,9 @@ The rendered output looks like this:
 
 {{< vimeo 146022717 >}}
 
-## youtube
+## 9 youtube
 
-[Documentation of `youtube`](https://gohugo.io/content-management/shortcodes/#youtube)
+[Documentation of `youtube`](https://gohugo.io/content-management/shortcodes#youtube)
 
 Example `youtube` input:
 

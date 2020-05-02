@@ -85,3 +85,26 @@
   -moz-appearance: $value;
   -webkit-appearance: $value;
 }
+
+@mixin overflow-wrap($value) {
+  word-wrap: $value;
+  overflow-wrap: $value;
+}
+
+@mixin line-break($value) {
+  -webkit-line-break: $value;
+  -ms-line-break: $value;
+  line-break: $value;
+}
+
+@mixin ms {
+  input::-ms-clear {
+    display: none;
+  }
+}
+
+@mixin object-fit($value) {
+  -o-object-fit: $value;
+  object-fit: $value;
+  font-family: 'object-fit: #{$value};';
+}

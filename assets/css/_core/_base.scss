@@ -24,7 +24,7 @@ html {
 ::selection {
   background-color: $selection-color;
 
-  .dark & {
+  [theme=dark] & {
     background-color: $selection-color-dark;
   }
 }
@@ -32,23 +32,23 @@ html {
 body {
   background-color: $global-background-color;
   color: $global-font-color;
-  overflow-wrap: break-word;
+  @include overflow-wrap(break-word);
   scrollbar-color: auto;
 
-  &.dark {
+  &[theme=dark] {
     color: $global-font-color-dark;
     background-color: $global-background-color-dark;
   }
 }
 
-@import "../_partial/mask";
-
-a {
-  text-decoration: none;
-}
-
+@include ms;
 @include link(true, true);
 
+@import "../_partial/mask";
 @import "../_partial/icon";
 @import "../_partial/details";
 @import "../_partial/fixed-button";
+
+img {
+  @include object-fit(contain);
+}

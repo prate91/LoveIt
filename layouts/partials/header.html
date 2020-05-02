@@ -5,9 +5,15 @@
             <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
                 {{- with .Site.Params.header.title -}}
                     {{- with .logo -}}
-                        {{- partial "plugin/image.html" (dict "src" . "alt" $.Site.Title "class" "logo") -}}
+                        {{- dict "src" . "alt" $.Site.Title "class" "logo" | partial "plugin/image.html" -}}
                     {{- end -}}
-                    {{- .pre | safeHTML }}{{ .name }}{{ .post | safeHTML -}}
+                    {{- with .pre -}}
+                        <span class="header-title-pre">{{ . | safeHTML }}</span>
+                    {{- end -}}
+                    {{- .name -}}
+                    {{- with .post -}}
+                        <span class="header-title-post">{{ . | safeHTML }}</span>
+                    {{- end -}}
                 {{- else -}}
                     {{- .Site.Title -}}
                 {{- end -}}
@@ -77,9 +83,15 @@
                 <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
                     {{- with .Site.Params.header.title -}}
                         {{- with .logo -}}
-                            {{- partial "plugin/image.html" (dict "src" . "alt" $.Site.Title "class" "logo") -}}
+                            {{- dict "src" . "alt" $.Site.Title "class" "logo" | partial "plugin/image.html" -}}
                         {{- end -}}
-                        {{- .pre | safeHTML }}{{ .name }}{{ .post | safeHTML -}}
+                        {{- with .pre -}}
+                            <span class="header-title-pre">{{ . | safeHTML }}</span>
+                        {{- end -}}
+                        {{- .name -}}
+                        {{- with .post -}}
+                            <span class="header-title-post">{{ . | safeHTML }}</span>
+                        {{- end -}}
                     {{- else -}}
                         {{- .Site.Title -}}
                     {{- end -}}
